@@ -14,12 +14,14 @@
 </head>
 <body>
 
-<!-- Ambient background that the glass materials refract -->
 <div class="ambient" aria-hidden="true"><i></i><i></i><i></i></div>
 
-<!-- Collapsing glass navigation bar -->
+<!-- Glass navigation bar: [back] [title] [language] -->
 <header class="nav" id="nav">
   <div class="nav-inner">
+    <button class="glass-btn back-btn" id="backBtn" hidden aria-label="Back">
+      <svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg><span data-i="back"></span>
+    </button>
     <span class="nav-title" id="navTitle">Arubaito</span>
     <button class="glass-btn lang-btn" id="langBtn" aria-label="Language"><span id="langLabel">EN</span></button>
   </div>
@@ -27,8 +29,8 @@
 
 <main class="app" id="app">
 
-  <!-- EXPLORE -->
-  <section class="view active" id="view-explore">
+  <!-- ============ HOME: categories ============ -->
+  <section class="view active" id="view-home">
     <div class="large-title">
       <h1 data-i="title">Arubaito</h1>
       <p class="subtitle" data-i="subtitle"></p>
@@ -42,32 +44,42 @@
 
     <div class="search glass">
       <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg>
-      <input id="q" type="search" inputmode="search" autocomplete="off" autocapitalize="off" enterkeyhint="search" data-ph="search">
+      <input id="q" type="search" inputmode="search" autocomplete="off" autocapitalize="off" enterkeyhint="search">
       <button class="clear" id="clearQ" aria-label="Clear" hidden>×</button>
     </div>
 
-    <div class="chips" id="chips"></div>
+    <h2 class="section-h" id="gridHead"></h2>
+    <div class="grid" id="grid"></div>
 
+    <!-- search results (cards) replace the grid while searching -->
+    <div id="results" hidden>
+      <h2 class="section-h" id="resultsHead"></h2>
+      <ul class="shops" id="resultsList"></ul>
+      <div class="empty" id="resultsEmpty" hidden></div>
+    </div>
+  </section>
+
+  <!-- ============ CATEGORY PAGE: big shop cards ============ -->
+  <section class="view" id="view-cat">
+    <div class="cat-hero" id="catHero"></div>
     <div class="toolbar">
-      <span class="count" id="count"></span>
+      <span class="count" id="catCount"></span>
       <div class="tools">
         <button class="pill" id="nearBtn"><svg viewBox="0 0 24 24"><path d="M12 21s-6.5-5.7-6.5-11a6.5 6.5 0 0113 0c0 5.3-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.3"/></svg><span data-i="near"></span></button>
         <button class="pill" id="sortBtn"></button>
       </div>
     </div>
-
-    <ul class="list" id="list"></ul>
-    <div class="empty" id="empty" hidden></div>
+    <ul class="shops" id="catList"></ul>
   </section>
 
-  <!-- SAVED -->
+  <!-- ============ SAVED ============ -->
   <section class="view" id="view-saved">
     <div class="large-title"><h1 data-i="tabSaved"></h1><p class="subtitle" data-i="savedSub"></p></div>
-    <ul class="list" id="savedList"></ul>
+    <ul class="shops" id="savedList"></ul>
     <div class="empty" id="savedEmpty" hidden></div>
   </section>
 
-  <!-- ABOUT -->
+  <!-- ============ ABOUT ============ -->
   <section class="view" id="view-about">
     <div class="large-title"><h1 data-i="tabAbout"></h1></div>
     <div class="card glass-card" id="aboutCard"></div>
@@ -78,8 +90,8 @@
 <!-- Floating glass tab bar -->
 <nav class="tabbar glass" id="tabbar">
   <span class="tab-thumb"></span>
-  <button class="tab active" data-tab="explore">
-    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M15.8 8.2l-2 5.6-5.6 2 2-5.6z"/></svg>
+  <button class="tab active" data-tab="home">
+    <svg viewBox="0 0 24 24"><rect x="4" y="4" width="6.5" height="6.5" rx="1.8"/><rect x="13.5" y="4" width="6.5" height="6.5" rx="1.8"/><rect x="4" y="13.5" width="6.5" height="6.5" rx="1.8"/><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="1.8"/></svg>
     <span data-i="tabExplore"></span>
   </button>
   <button class="tab" data-tab="saved">
@@ -95,7 +107,7 @@
 <!-- Detail sheet -->
 <div class="backdrop" id="backdrop"></div>
 <aside class="sheet glass-sheet" id="sheet" aria-hidden="true">
-  <div class="grabber" id="grabber"></div>
+  <div class="grabber"></div>
   <div class="sheet-body" id="sheetBody"></div>
 </aside>
 
