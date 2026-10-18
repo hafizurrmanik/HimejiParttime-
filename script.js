@@ -41,7 +41,6 @@ const T = {
       ['Where is the data from?', 'Names, phone numbers and map locations come from Google Maps listings (October 2026). Some places have no number listed.'],
       ['Important', 'This list shows where to look, not who is hiring. Always call or check the shop’s recruitment page. Bars and snack bars can have special rules for age and work type — ask before you apply.'],
       ['About Me', 'Hello! My name is Hafizur R. Manik, and I am currently studying at Japan Engineering College (JEC) in Japan. I am a motivated and hardworking student who is eager to learn new skills, gain practical experience, and explore new opportunities. I value honesty, responsibility, and continuous self-improvement. Through my studies and experiences in Japan, I aim to develop my knowledge, improve my abilities, and build a successful future. Contact: 090-7897-7485.'],
-      ['About Me', 'Hello! My name is Hafizur R. Manik, and I am currently studying at Japan Engineering College (JEC) in Japan. I am a motivated and hardworking student who is eager to learn new skills, gain practical experience, and explore new opportunities. I value honesty, responsibility, and continuous self-improvement. Through my studies and experiences in Japan, I aim to develop my knowledge, improve my abilities, and build a successful future. Contact: 090-7897-7485.'],
     ],
     walkNote: 'About',
   },
@@ -63,7 +62,6 @@ const T = {
       ['তথ্য কোথা থেকে?', 'নাম, ফোন নম্বর আর ম্যাপের অবস্থান Google Maps থেকে নেওয়া (অক্টোবর ২০২৬)। কিছু জায়গার নম্বর নেই।'],
       ['গুরুত্বপূর্ণ', 'এই তালিকা শুধু কোথায় খুঁজবেন তা দেখায়, কে লোক নিচ্ছে তা নয়। সবসময় ফোন করে বা দোকানের ওয়েবসাইটে দেখে নিন। বার ও স্ন্যাক বারে বয়স আর কাজের ধরন নিয়ে আলাদা নিয়ম থাকতে পারে, আবেদনের আগে জিজ্ঞেস করুন।'],
       ['আমার সম্পর্কে', 'হ্যালো! আমার নাম Hafizur R. Manik। আমি বর্তমানে জাপানের Japan Engineering College (JEC)-এ পড়াশোনা করছি। আমি একজন পরিশ্রমী ও আগ্রহী শিক্ষার্থী। নতুন দক্ষতা শেখা, বাস্তব অভিজ্ঞতা অর্জন এবং নতুন সুযোগ খুঁজে নিতে ভালোবাসি। সততা, দায়িত্বশীলতা ও নিজেকে ক্রমাগত উন্নত করাকে গুরুত্ব দিই। জাপানে পড়াশোনা ও অভিজ্ঞতার মাধ্যমে জ্ঞান ও দক্ষতা বাড়িয়ে সফল ভবিষ্যৎ গড়তে চাই। যোগাযোগ: 090-7897-7485।'],
-      ['আমার সম্পর্কে', 'হ্যালো! আমার নাম Hafizur R. Manik। আমি বর্তমানে জাপানের Japan Engineering College (JEC)-এ পড়াশোনা করছি। আমি পরিশ্রমী ও নতুন কিছু শেখার আগ্রহী একজন শিক্ষার্থী। নতুন দক্ষতা অর্জন, বাস্তব অভিজ্ঞতা নেওয়া এবং নিজের জ্ঞান ও যোগ্যতা বাড়ানোর মাধ্যমে ভবিষ্যতে সফল হতে চাই। যোগাযোগ: 090-7897-7485।'],
     ],
   },
   ja: {
@@ -84,7 +82,6 @@ const T = {
       ['データの出典', '店名・電話番号・地図の位置は Google マップの情報（2026年10月）です。電話番号が無いお店もあります。'],
       ['ご注意', 'このリストは「探す場所」を示すもので、募集中かどうかは分かりません。必ず電話や店舗の採用ページで確認してください。バー・スナックは年齢や仕事内容に特別なルールがある場合があります。'],
       ['自己紹介', 'こんにちは。Hafizur R. Manik（ハフィズル・R・マニク）です。現在、日本のJapan Engineering College（JEC）で勉強しています。新しいスキルを学び、実践的な経験を積み、さまざまな機会に挑戦したいと考えています。誠実さと責任感を大切にしながら、知識と能力を高め、将来の目標に向かって努力しています。連絡先：090-7897-7485。'],
-      ['自己紹介', 'こんにちは。Hafizur R. Manik と申します。現在、日本の Japan Engineering College（JEC）で勉強しています。新しいことを学び、実践的な経験を積み、自分の知識や能力を高めることを大切にしています。将来に向けて努力を続けています。連絡先：090-7897-7485。'],
     ],
   },
 };
@@ -175,7 +172,14 @@ function renderSaved() {
   const b = $('#savedBadge'); b.hidden = !S.saved.size; b.textContent = S.saved.size;
 }
 function renderAbout() {
-  $('#aboutCard').innerHTML = t().about.map((a, i) => `<h3>${a[0]}</h3><p class="${i === 2 ? 'warn' : ''}">${a[1]}</p>`).join('');
+  $('#aboutCard').innerHTML = t().about.map((a, i) => {
+    if (i === 3) {
+      const phone = '09078977485';
+      const bio = a[1].replace(/\s*Contact:\s*090-7897-7485\.?/i, '').replace(/\s*যোগাযোগ:\s*090-7897-7485\.?/i, '').replace(/連絡先：090-7897-7485。?/i, '').trim();
+      return `<section class="profile-card"><div class="profile-top"><div class="profile-avatar" aria-hidden="true">HM</div><div class="profile-heading"><span class="eyebrow">${S.lang === 'bn' ? 'আমার পরিচয়' : S.lang === 'ja' ? 'プロフィール' : 'PERSONAL PROFILE'}</span><h2>Hafizur R. Manik</h2><p>${S.lang === 'bn' ? 'শিক্ষার্থী · Japan Engineering College' : S.lang === 'ja' ? '学生 · Japan Engineering College' : 'Student · Japan Engineering College'}</p></div></div><p class="profile-bio">${bio}</p><a class="profile-contact" href="tel:${phone}"><span class="contact-icon">☎</span><span><small>${S.lang === 'bn' ? 'ফোনে যোগাযোগ' : S.lang === 'ja' ? '電話で連絡' : 'CONTACT PHONE'}</small><strong>090-7897-7485</strong></span><span class="contact-arrow">↗</span></a></section>`;
+    }
+    return `<section class="info-card info-card-${i}"><div class="info-index">${String(i + 1).padStart(2, '0')}</div><div class="info-content"><h3>${a[0]}</h3><p class="${i === 2 ? 'warn' : ''}">${a[1]}</p></div></section>`;
+  }).join('');
 }
 function applyLang() {
   const L = t();
